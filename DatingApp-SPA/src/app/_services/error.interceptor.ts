@@ -21,8 +21,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                     }
                     const serverError = error.error;
                     let modalStatErrors = '';
-                    if (serverError.errors && typeof serverError.erros === 'object') {
-                        for (const key in serverError.erros) {
+                    if (serverError.errors && typeof serverError.errors === 'object') {
+                        for (const key in serverError.errors) {
                             if (serverError.errors[key]) {
                                 modalStatErrors += serverError.errors[key] + '\n';
                             }
