@@ -19,9 +19,13 @@ export class NavbarComponent implements OnInit {
 
   login(form: NgForm) {
     this.authService.login(this.model).subscribe(next => {
-      this.alertify.success('Logged In success!');
+      this.alertify.success('Logged In successfully!');
     }, error => {
-      this.alertify.error(error);
+      if (error !== 'Unauthorized') {
+        this.alertify.error('An Error Occured');
+      } else {
+        this.alertify.error(error);
+      }
     }, () => {
       this.router.navigate(['/members']);
     });
