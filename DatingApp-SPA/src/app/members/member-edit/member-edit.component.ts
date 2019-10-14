@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm', {static: true}) editForm: NgForm;
   user: User;
+  photoUrl: string;
   @HostListener('window:beforeunload', ['$event'])
   unloadNOtification($event: any) {
     if (this.editForm.dirty) {
@@ -28,6 +29,7 @@ export class MemberEditComponent implements OnInit {
     this.route.data.subscribe(data => {
         this.user = data['user'];
     });
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   updateProfile() {
@@ -37,5 +39,15 @@ export class MemberEditComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
+  }
+
+  updateMainPhoto(photoUrl) {
+    this.user.photoUrl = photoUrl;
+
+    // * My solution to updating navbar photo
+    /* const userFromStorage = JSON.parse(localStorage.getItem('user'));
+    userFromStorage.photoUrl = photoUrl;
+    localStorage.setItem('user', JSON.stringify(userFromStorage));
+    this.authService.currentUser = userFromStorage; */
   }
 }
