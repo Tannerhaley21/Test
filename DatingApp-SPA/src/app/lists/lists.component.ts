@@ -23,7 +23,7 @@ export class ListsComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.users = data['users'].results;
+      this.users = data['users'].result;
       this.pagination = data['users'].pagination;
     });
 
